@@ -141,15 +141,30 @@ FSJS project 2 - List Filter and Pagination
       const navlink = document.querySelector('.pagination')
     
       for(let i = 0; i < lis.length; i++){
+
         const studentName = lis[i].firstElementChild.querySelector('h3').innerHTML;
+        console.log(studentName)
         if (searchBox.value === ''){
           errMsg.innerHTML = 'Please enter a student name';
-          
-          
+      
         }
         else if(searchBox.value === studentName) {
+
+          // will hide the error msg
+          const msg = document.querySelector('.msg');
+          msg.style.display = 'none'
+
+      // appends the reload button to page after a search is done
+      ul.appendChild(reloadbtn);
+      // invokes reload function when the reload button is clicked
+      const reload  = ul.lastChild;
           lis[i].style.display = '';
-         
+          
+          reload.addEventListener('click', (e) =>{
+        if(reload.innerHTML === 'Previous') {
+          reloaPage();
+        }
+      })
           
         } else {
           lis[i].style.display = 'none'
@@ -161,16 +176,9 @@ FSJS project 2 - List Filter and Pagination
       }
       searchBox.value = '';
      
-      // appends the reload button to page after a search is done
-      ul.appendChild(reloadbtn);
-      // invokes reload function when the reload button is clicked
-      const reload  = ul.lastChild;
+     
     
-      reload.addEventListener('click', (e) =>{
-        if(reload.innerHTML === 'Previous') {
-          reloaPage();
-        }
-      })
+     
      
     })
     
@@ -178,7 +186,7 @@ FSJS project 2 - List Filter and Pagination
     function reloaPage(){
       window.location.reload(true);
     }
-    
+   
     
     
     
